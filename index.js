@@ -20,6 +20,7 @@ let apiKey = `08cc14dbe53b44c8b0f21937232812`,
 async function getWeather(location) {
     let response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=Q7QDGZQWY97PQQ3W6HCC4EG25&contentType=json`)
     let data = await response.json()
+    console.log("this is data",data)
     displayWeather(data)
 }
 getWeather("cairo")
@@ -30,6 +31,7 @@ function displayWeather(data) {
     let weatherArr = data.days
     let cardsHtml = ''
     for (let [index, day] of weatherArr.entries()) {
+        console.log(day.icon)
         cardsHtml += `  <div class="card ${index == 0 ? "active" : ""}">
         <div class="card-header">
         <div>${index}</div>
@@ -85,7 +87,7 @@ function displayWeather(data) {
         return currentCity == data.address
 
     })
- 
+
     if (exist) return
     displayImg(data.address)
     recentCities.push(data.address)
